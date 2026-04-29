@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Museu Virtual da História da Computação</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Orbitron (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== TELA DE LOGIN ===================== -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-bg-grid"></div>
+    <div class="login-card">
+      <div class="login-logo">
+        <span class="icon-cpu">⬡</span>
+      </div>
+      <h2 class="login-title">Acesso ao Portal</h2>
+      <p class="login-sub">Museu Virtual da História da Computação</p>
+
+      <div class="form-group">
+        <label for="login-user">E-mail</label>
+        <input type="email" id="login-user" placeholder="Digite seu e-mail" autocomplete="email" />
+        <span class="field-error" id="err-user"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="login-pass">Senha</label>
+        <input type="password" id="login-pass" placeholder="Digite sua senha" autocomplete="current-password" />
+        <span class="field-error" id="err-pass"></span>
+      </div>
+
+      <p class="login-hint">Entre com seu e-mail e senha ou crie uma nova conta.</p>
+
+      <button type="button" class="btn-primary btn-full" id="btn-login">
+        <span>Entrar</span>
+        <span class="btn-arrow">→</span>
+      </button>
+
+      <span class="login-error" id="login-error"></span>
+    </div>
+  </div>
+
+  <!-- ===================== SITE PRINCIPAL ===================== -->
+  <div id="main-site" class="hidden">
+
+    <!-- ---- NAVEGAÇÃO FIXA ---- -->
+    <nav id="navbar">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-icon">⬡</span>
+          <span class="logo-text">MVHC</span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#sobre"        onclick="closeMenu()">Sobre</a></li>
+          <li><a href="#justificativa" onclick="closeMenu()">Justificativa</a></li>
+          <li><a href="#objetivos"    onclick="closeMenu()">Objetivos</a></li>
+          <li><a href="#tecnologias"  onclick="closeMenu()">Tecnologias</a></li>
+          <li><a href="#funcionalidades" onclick="closeMenu()">Funcionalidades</a></li>
+          <li><a href="#desafios"     onclick="closeMenu()">Desafios</a></li>
+          <li><a href="#cronograma"   onclick="closeMenu()">Cronograma</a></li>
+          <li>
+            <a href="https://seu-link-da-unity-webgl.com"
+               target="_blank" rel="noopener"
+               class="nav-cta">Acessar Museu</a>
+          </li>
+          <li>
+            <button type="button" onclick="logout(); closeMenu();" class="nav-link-btn">Sair</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero" class="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-content">
+        <div class="hero-badge animate-fadein" style="animation-delay:.1s">
+          Análise e Projeto de Sistemas · 2026.1
+        </div>
+        <h1 class="hero-title animate-fadein" style="animation-delay:.25s">
+          Museu Virtual<br />
+          <span class="gradient-text">da História da<br />Computação</span>
+        </h1>
+        <p class="hero-sub animate-fadein" style="animation-delay:.45s">
+          Explore marcos históricos da computação em um ambiente 3D imersivo,<br class="hide-mobile" />
+          acessível diretamente pelo seu navegador — sem instalações.
+        </p>
+        <div class="hero-actions animate-fadein" style="animation-delay:.6s">
+          <a href="https://seu-link-da-unity-webgl.com"
+             target="_blank" rel="noopener"
+             class="btn-primary btn-lg" id="hero-cta">
+            <span class="btn-pulse"></span>
+            <span>Acessar Museu Virtual</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="#sobre" class="btn-ghost btn-lg">Saiba mais</a>
+        </div>
+
+        <!-- Créditos -->
+        <div class="hero-credits animate-fadein" style="animation-delay:.8s">
+          <div class="credit-item">
+            <span class="credit-label">Alunos</span>
+            <span class="credit-value">Felipe Haiashida Carvalho &amp; Fernando de Freitas</span>
+          </div>
+          <div class="credit-divider"></div>
+          <div class="credit-item">
+            <span class="credit-label">Disciplina</span>
+            <span class="credit-value">Análise e Projeto de Sistemas</span>
+          </div>
+          <div class="credit-divider"></div>
+          <div class="credit-item">
+            <span class="credit-label">Período</span>
+            <span class="credit-value">2026.1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-hint">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE O PROJETO ===================== -->
+    <section id="sobre" class="section section-sobre">
+      <div class="container">
+        <div class="section-label">01 — Sobre</div>
+        <div class="sobre-grid">
+          <div class="sobre-text">
+            <h2 class="section-title">Sobre o <span class="gradient-text">Projeto</span></h2>
+            <p>
+              O <strong>Museu Virtual da História da Computação</strong> propõe o desenvolvimento
+              de um museu interativo e imersivo acessível diretamente pelo navegador, sem
+              necessidade de instalação de softwares adicionais.
+            </p>
+            <p>
+              O projeto utiliza <strong>Unity</strong> para a construção do ambiente 3D e exporta
+              a aplicação em formato <strong>WebGL</strong>, integrando-a a uma página web
+              construída com <strong>HTML5, CSS3 e JavaScript</strong>. O resultado é uma
+              experiência educacional que une narrativa histórica, exploração espacial e
+              tecnologia de ponta.
+            </p>
+            <p>
+              Ao navegar pelo museu, o usuário encontra artefatos históricos como o
+              <strong>ENIAC</strong>, o <strong>Apple II</strong>, os primeiros microprocessadores
+              e outros marcos fundamentais que moldaram a computação moderna — cada um acompanhado
+              de painéis informativos interativos.
+            </p>
+          </div>
+          <div class="sobre-visual">
+            <div class="visual-card">
+              <div class="visual-icon">🖥️</div>
+              <div class="visual-stat">3D</div>
+              <div class="visual-desc">Ambiente imersivo explorado em primeira ou terceira pessoa</div>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🌐</div>
+              <div class="visual-stat">Web</div>
+              <div class="visual-desc">100% acessível pelo navegador via WebGL</div>
+            </div>
+            <div class="visual-card">
+              <div class="visual-icon">🏛️</div>
+              <div class="visual-stat">Histórico</div>
+              <div class="visual-desc">Acervo de marcos históricos da computação</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== JUSTIFICATIVA ===================== -->
+    <section id="justificativa" class="section section-dark">
+      <div class="container">
+        <div class="section-label">02 — Justificativa</div>
+        <h2 class="section-title text-center">Por que um <span class="gradient-text">Museu Virtual?</span></h2>
+        <p class="section-intro text-center">
+          O ensino tradicional da História da Computação ainda depende majoritariamente de textos
+          e imagens estáticas — uma abordagem que limita o engajamento e a retenção do conhecimento.
+        </p>
+        <div class="justif-cards">
+          <div class="justif-card reveal">
+            <div class="justif-icon">📚</div>
+            <h3>Limitações Tradicionais</h3>
+            <p>Materiais estáticos dificultam a contextualização temporal e espacial dos artefatos históricos, tornando o aprendizado abstrato e pouco engajador.</p>
+          </div>
+          <div class="justif-card reveal">
+            <div class="justif-icon">🎮</div>
+            <h3>Poder da Interatividade</h3>
+            <p>Ambientes interativos estimulam a curiosidade, aumentam o tempo de engajamento e favorecem a memorização por meio da experiência ativa e exploratória.</p>
+          </div>
+          <div class="justif-card reveal">
+            <div class="justif-icon">♿</div>
+            <h3>Acessibilidade Universal</h3>
+            <p>Por rodar no navegador, o museu elimina barreiras geográficas e tecnológicas — qualquer pessoa com acesso à internet pode visitar o acervo.</p>
+          </div>
+          <div class="justif-card reveal">
+            <div class="justif-icon">🎓</div>
+            <h3>Propósito Educacional</h3>
+            <p>Une competências técnicas de engenharia de software ao impacto social de democratizar o acesso ao patrimônio histórico da ciência da computação.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== OBJETIVOS ===================== -->
+    <section id="objetivos" class="section">
+      <div class="container">
+        <div class="section-label">03 — Objetivos</div>
+        <h2 class="section-title">O que queremos <span class="gradient-text">alcançar</span></h2>
+
+        <div class="obj-layout">
+          <!-- Objetivo Geral -->
+          <div class="obj-geral reveal">
+            <div class="obj-geral-label">Objetivo Geral</div>
+            <p class="obj-geral-text">
+              Desenvolver um museu virtual interativo sobre a História da Computação, acessível
+              pelo navegador, utilizando Unity/WebGL integrado a uma interface web moderna,
+              promovendo uma experiência educacional imersiva, acessível e engajadora.
+            </p>
+          </div>
+
+          <!-- Objetivos Específicos -->
+          <div class="obj-especificos">
+            <div class="obj-esp-label">Objetivos Específicos</div>
+            <ul class="obj-list">
+              <li class="obj-item reveal">
+                <span class="obj-num">01</span>
+                <div>
+                  <strong>Levantamento de Requisitos</strong>
+                  <p>Identificar e documentar os requisitos funcionais e não funcionais do sistema.</p>
+                </div>
+              </li>
+              <li class="obj-item reveal">
+                <span class="obj-num">02</span>
+                <div>
+                  <strong>Arquitetura e Tecnologias</strong>
+                  <p>Definir a arquitetura do projeto e selecionar as tecnologias mais adequadas.</p>
+                </div>
+              </li>
+              <li class="obj-item reveal">
+                <span class="obj-num">03</span>
+                <div>
+                  <strong>Design de Interface</strong>
+                  <p>Planejar e prototipar a interface do usuário para a página web e o ambiente 3D.</p>
+                </div>
+              </li>
+              <li class="obj-item reveal">
+                <span class="obj-num">04</span>
+                <div>
+                  <strong>Modelagem UML</strong>
+                  <p>Elaborar os diagramas UML necessários (casos de uso, classes, sequência).</p>
+                </div>
+              </li>
+              <li class="obj-item reveal">
+                <span class="obj-num">05</span>
+                <div>
+                  <strong>Integração WebGL</strong>
+                  <p>Integrar a aplicação Unity WebGL à página web, garantindo desempenho no navegador.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TECNOLOGIAS ===================== -->
+    <section id="tecnologias" class="section section-dark">
+      <div class="container">
+        <div class="section-label">04 — Tecnologias</div>
+        <h2 class="section-title text-center">Stack <span class="gradient-text">Tecnológico</span></h2>
+        <p class="section-intro text-center">Ferramentas e linguagens que constroem a experiência.</p>
+        <div class="tech-grid">
+
+          <div class="tech-card reveal">
+            <div class="tech-icon unity">U</div>
+            <h3>Unity</h3>
+            <p>Motor de jogo utilizado para modelar, iluminar e programar o ambiente 3D do museu.</p>
+            <div class="tech-tag">3D Engine</div>
+          </div>
+
+          <div class="tech-card reveal">
+            <div class="tech-icon webgl">W</div>
+            <h3>WebGL</h3>
+            <p>API gráfica que permite renderizar o ambiente 3D diretamente no navegador sem plugins.</p>
+            <div class="tech-tag">Renderização</div>
+          </div>
+
+          <div class="tech-card reveal">
+            <div class="tech-icon csharp">C#</div>
+            <h3>C#</h3>
+            <p>Linguagem principal para scripting no Unity: movimentação, interações e lógica do museu.</p>
+            <div class="tech-tag">Linguagem</div>
+          </div>
+
+          <div class="tech-card reveal">
+            <div class="tech-icon html5">H5</div>
+            <h3>HTML5</h3>
+            <p>Estrutura semântica da página web que hospeda e apresenta a aplicação WebGL.</p>
+            <div class="tech-tag">Markup</div>
+          </div>
+
+          <div class="tech-card reveal">
+            <div class="tech-icon css3">C3</div>
+            <h3>CSS3</h3>
+            <p>Estilização, animações e layout responsivo da interface web do projeto.</p>
+            <div class="tech-tag">Estilo</div>
+          </div>
+
+          <div class="tech-card reveal">
+            <div class="tech-icon js">JS</div>
+            <h3>JavaScript</h3>
+            <p>Interatividade da página web: navegação, validações e comunicação com a aplicação Unity.</p>
+            <div class="tech-tag">Interatividade</div>
+          </div>
+
+          <div class="tech-card reveal">
+            <div class="tech-icon gh">GH</div>
+            <h3>GitHub Pages</h3>
+            <p>Hospedagem gratuita e contínua do projeto, integrada ao repositório Git do time.</p>
+            <div class="tech-tag">Deploy</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FUNCIONALIDADES ===================== -->
+    <section id="funcionalidades" class="section">
+      <div class="container">
+        <div class="section-label">05 — Funcionalidades</div>
+        <h2 class="section-title">O que você pode <span class="gradient-text">fazer</span></h2>
+        <div class="feat-grid">
+          <div class="feat-item reveal">
+            <div class="feat-dot"></div>
+            <div>
+              <strong>Navegação 3D</strong>
+              <p>Explore o museu em primeira ou terceira pessoa com controles intuitivos de teclado e mouse.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-dot"></div>
+            <div>
+              <strong>Interação com Objetos</strong>
+              <p>Clique em artefatos históricos para ativar animações, sons e informações detalhadas.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-dot"></div>
+            <div>
+              <strong>Painéis Informativos</strong>
+              <p>Cada peça do acervo exibe um painel com dados históricos, imagens e curiosidades.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-dot"></div>
+            <div>
+              <strong>Página Web Guia</strong>
+              <p>Instruções de uso, contexto histórico e créditos acessíveis antes de entrar no museu.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-dot"></div>
+            <div>
+              <strong>Acesso Direto pelo Navegador</strong>
+              <p>Sem instalação. Basta acessar a URL e iniciar a experiência imediatamente.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-dot"></div>
+            <div>
+              <strong>Interface Responsiva</strong>
+              <p>A página web se adapta a desktops, tablets e smartphones com fluidez.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DESAFIOS E SOLUÇÕES ===================== -->
+    <section id="desafios" class="section section-dark">
+      <div class="container">
+        <div class="section-label">06 — Desafios</div>
+        <h2 class="section-title text-center">Desafios e <span class="gradient-text">Soluções</span></h2>
+        <p class="section-intro text-center">
+          Exportar aplicações 3D para o navegador exige atenção especial ao desempenho.
+          Estas são as estratégias adotadas.
+        </p>
+        <div class="challenge-grid">
+          <div class="challenge-card reveal">
+            <div class="challenge-header">
+              <span class="challenge-icon">⚡</span>
+              <span class="challenge-badge problem">Desafio</span>
+            </div>
+            <h3>Tamanho do Build</h3>
+            <p>Builds WebGL da Unity podem atingir centenas de MB, prejudicando o carregamento.</p>
+            <div class="challenge-solution">
+              <span class="challenge-badge solution">Solução</span>
+              <p>Compressão Brotli/gzip no servidor e divisão do build em chunks carregados sob demanda.</p>
+            </div>
+          </div>
+          <div class="challenge-card reveal">
+            <div class="challenge-header">
+              <span class="challenge-icon">🔺</span>
+              <span class="challenge-badge problem">Desafio</span>
+            </div>
+            <h3>Complexidade dos Modelos</h3>
+            <p>Modelos 3D de alta resolução degradam a taxa de quadros no navegador.</p>
+            <div class="challenge-solution">
+              <span class="challenge-badge solution">Solução</span>
+              <p>Uso exclusivo de modelos low-poly otimizados com técnicas de LOD (Level of Detail).</p>
+            </div>
+          </div>
+          <div class="challenge-card reveal">
+            <div class="challenge-header">
+              <span class="challenge-icon">🎨</span>
+              <span class="challenge-badge problem">Desafio</span>
+            </div>
+            <h3>Texturas Pesadas</h3>
+            <p>Texturas não comprimidas consomem memória excessiva, causando travamentos.</p>
+            <div class="challenge-solution">
+              <span class="challenge-badge solution">Solução</span>
+              <p>Compressão de texturas via formato ETC2/ASTC e atlas de texturas para reduzir draw calls.</p>
+            </div>
+          </div>
+          <div class="challenge-card reveal">
+            <div class="challenge-header">
+              <span class="challenge-icon">💡</span>
+              <span class="challenge-badge problem">Desafio</span>
+            </div>
+            <h3>Iluminação em Tempo Real</h3>
+            <p>Cálculo dinâmico de sombras consome muito processamento no ambiente do navegador.</p>
+            <div class="challenge-solution">
+              <span class="challenge-badge solution">Solução</span>
+              <p>Iluminação pré-calculada (baked lighting) com Lightmaps estáticos para toda a cena.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CRONOGRAMA ===================== -->
+    <section id="cronograma" class="section">
+      <div class="container">
+        <div class="section-label">07 — Cronograma</div>
+        <h2 class="section-title">Linha do <span class="gradient-text">Tempo</span></h2>
+        <p class="section-intro">Planejamento em quatro fases do projeto.</p>
+
+        <div class="timeline">
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker">
+              <div class="tl-num">01</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="tl-phase">Fase 1</div>
+              <h3>Requisitos, UML e Design</h3>
+              <p>Levantamento de requisitos funcionais e não funcionais, modelagem dos diagramas UML (casos de uso, classes e sequência) e prototipação da interface do usuário.</p>
+              <div class="tl-tags">
+                <span>Requisitos</span>
+                <span>UML</span>
+                <span>Protótipo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker">
+              <div class="tl-num">02</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="tl-phase">Fase 2</div>
+              <h3>Front-end Web e Cenário Unity</h3>
+              <p>Desenvolvimento da página web (HTML, CSS, JS), criação do cenário base no Unity com os primeiros modelos 3D e configuração inicial do ambiente de navegação.</p>
+              <div class="tl-tags">
+                <span>HTML/CSS/JS</span>
+                <span>Unity</span>
+                <span>Modelagem 3D</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker">
+              <div class="tl-num">03</div>
+              <div class="tl-line"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="tl-phase">Fase 3</div>
+              <h3>Programação e Integração WebGL</h3>
+              <p>Implementação das interações em C# (movimentação, painéis informativos, triggers), exportação do build WebGL e integração com a página web.</p>
+              <div class="tl-tags">
+                <span>C#</span>
+                <span>Scripts Unity</span>
+                <span>WebGL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-marker">
+              <div class="tl-num">04</div>
+              <div class="tl-line-last"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="tl-phase">Fase 4</div>
+              <h3>Testes, Otimização e Publicação</h3>
+              <p>Testes de desempenho, usabilidade e compatibilidade entre navegadores, otimização do build e publicação final via GitHub Pages.</p>
+              <div class="tl-tags">
+                <span>Testes</span>
+                <span>Otimização</span>
+                <span>GitHub Pages</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA FINAL ===================== -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="cta-glow"></div>
+          <h2>Pronto para explorar?</h2>
+          <p>Embarque em uma jornada interativa pelos marcos que definiram a história da computação.</p>
+          <a href="https://seu-link-da-unity-webgl.com"
+             target="_blank" rel="noopener"
+             class="btn-primary btn-lg">
+            <span class="btn-pulse"></span>
+            <span>Acessar Museu Virtual</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== RODAPÉ ===================== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-icon">⬡</span>
+            <span class="logo-text">MVHC</span>
+            <p>Museu Virtual da História da Computação</p>
+          </div>
+          <div class="footer-info">
+            <h4>Projeto Acadêmico</h4>
+            <ul>
+              <li>Felipe Haiashida Carvalho</li>
+              <li>Fernando de Freitas</li>
+              <li>Análise e Projeto de Sistemas</li>
+              <li>Período 2026.1</li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#sobre">Sobre o Projeto</a></li>
+              <li><a href="#objetivos">Objetivos</a></li>
+              <li><a href="#tecnologias">Tecnologias</a></li>
+              <li><a href="#cronograma">Cronograma</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Museu Virtual da História da Computação. Projeto acadêmico de código aberto.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /main-site -->
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
