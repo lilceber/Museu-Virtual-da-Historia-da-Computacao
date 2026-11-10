@@ -2,7 +2,7 @@
 
 > Um passeio interativo pela evolução da computação, das primeiras máquinas de calcular aos dias de hoje.
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/status-concluído-green)
 ![Licença](https://img.shields.io/badge/licença-[MIT]-blue)
 
 ## 📑 Sumário
@@ -13,7 +13,7 @@
 - [Tecnologias](#-tecnologias)
 - [Estrutura do projeto](#-estrutura-do-projeto)
 - [Licença](#-licença)
-- [Autor](#-autor)
+- [Autores](#-autores)
 
 ## 📖 Sobre o projeto
 
@@ -59,6 +59,6 @@ Sugestões de novos itens para o acervo também são bem-vindas via *Issues*.
 
 Distribuído sob a licença [MIT]. Veja o arquivo `LICENSE` para mais detalhes.
 
-## 👤 Autor
+## 👤 Autores
 
-**Fernando Medeiros e Felipe Haiashida** · [@lilceber](https://github.com/lilceber)|[@lilceber](https://github.com/lilceber)
+**Fernando Medeiros e Felipe Haiashida** · [@lilceber](https://github.com/lilceber)|[@FelipeHaiashida](https://github.com/FelipeHaiashida)
